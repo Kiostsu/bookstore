@@ -26,8 +26,10 @@ public class FramePrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         barraDeMenu = new javax.swing.JMenuBar();
         mnCadastros = new javax.swing.JMenu();
-        miMarca = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        miAluno = new javax.swing.JMenuItem();
+        miGenero = new javax.swing.JMenuItem();
+        miLivros = new javax.swing.JMenuItem();
+        miLocacao = new javax.swing.JMenuItem();
         menuSobre = new javax.swing.JMenu();
         miInfo = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
@@ -61,24 +63,49 @@ public class FramePrincipal extends javax.swing.JFrame {
         mnCadastros.setText("Cadastros");
         mnCadastros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        miMarca.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
-        miMarca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        miMarca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/vcard.png"))); // NOI18N
-        miMarca.setText("Locações");
-        miMarca.addActionListener(new java.awt.event.ActionListener() {
+        miAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        miAluno.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        miAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/vcard.png"))); // NOI18N
+        miAluno.setText("Alunos");
+        miAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miMarcaActionPerformed(evt);
+                miAlunoActionPerformed(evt);
             }
         });
-        mnCadastros.add(miMarca);
+        mnCadastros.add(miAluno);
 
-        jMenuItem1.setText("Gêneros");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        miGenero.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        miGenero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        miGenero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/vcard.png"))); // NOI18N
+        miGenero.setText("Generos");
+        miGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                miGeneroActionPerformed(evt);
             }
         });
-        mnCadastros.add(jMenuItem1);
+        mnCadastros.add(miGenero);
+
+        miLivros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        miLivros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        miLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/vcard.png"))); // NOI18N
+        miLivros.setText("Livros");
+        miLivros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLivrosActionPerformed(evt);
+            }
+        });
+        mnCadastros.add(miLivros);
+
+        miLocacao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        miLocacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        miLocacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/vcard.png"))); // NOI18N
+        miLocacao.setText("Locações");
+        miLocacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLocacaoActionPerformed(evt);
+            }
+        });
+        mnCadastros.add(miLocacao);
 
         barraDeMenu.add(mnCadastros);
 
@@ -140,20 +167,33 @@ public class FramePrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_miSairActionPerformed
 
-    private void miMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMarcaActionPerformed
+    private void miAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAlunoActionPerformed
+        IfAluno frm = new IfAluno(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
+        jDesktopPane1.add(frm);
+        //centralizar(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_miAlunoActionPerformed
+
+    private void miGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGeneroActionPerformed
+        IfGenero frm = new IfGenero(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
+        jDesktopPane1.add(frm);
+        //centralizar(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_miGeneroActionPerformed
+
+    private void miLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLivrosActionPerformed
+        IfLivros frm = new IfLivros(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
+        jDesktopPane1.add(frm);
+        //centralizar(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_miLivrosActionPerformed
+
+    private void miLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLocacaoActionPerformed
         IfLocacao2 frm = new IfLocacao2(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
         jDesktopPane1.add(frm);
         //centralizar(frm);
         frm.setVisible(true);
-    }//GEN-LAST:event_miMarcaActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-      
-         IfGenero frm = new IfGenero(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
-        jDesktopPane1.add(frm);
-        //centralizar(frm);
-        frm.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_miLocacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,11 +229,13 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraDeMenu;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuSair;
     private javax.swing.JMenu menuSobre;
+    private javax.swing.JMenuItem miAluno;
+    private javax.swing.JMenuItem miGenero;
     private javax.swing.JMenuItem miInfo;
-    private javax.swing.JMenuItem miMarca;
+    private javax.swing.JMenuItem miLivros;
+    private javax.swing.JMenuItem miLocacao;
     private javax.swing.JMenuItem miSair;
     private javax.swing.JMenu mnCadastros;
     // End of variables declaration//GEN-END:variables

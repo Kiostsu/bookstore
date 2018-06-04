@@ -74,10 +74,7 @@ public class AlunoDAO extends AbstractDAO {
             con = new Conexao().getConnection(); // realiza a conexão com o banco usando URL usuario e senha
         }
 
-        try {
-                        pstmt = con.prepareStatement("select id from generos where descricao=?");//selecionar id onde nome=
-
-           
+        try {         
             String sql = "update aluno set curso = ?,turma = ?,nome = ?,numero_matricula = ? where id = ?";
             //O segundo parâmetro específica que vai retornar o código do registro inserido
             pstmt = con.prepareStatement(sql  );

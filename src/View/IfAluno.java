@@ -1,8 +1,8 @@
 package View;
 
-import DAO.GeneroDAO;
-import DAO.ResultSetGenero;
-import Entidades.Genero;
+import DAO.AlunoDAO;
+import DAO.ResultSetAluno;
+import Entidades.Aluno;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -11,15 +11,15 @@ import javax.swing.event.ListSelectionListener;
 public class IfAluno extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form IfGenero
+     * Creates new form IfAluno
      */
     boolean addRegistro = false;
-    Genero genero = new Genero();
-    GeneroDAO dao = new GeneroDAO();
+    Aluno aluno = new Aluno();
+    AlunoDAO dao = new AlunoDAO();
 
     public IfAluno() {
         initComponents();
-        tfDescricaoGenero.setEnabled(false); //desabilitar tf do nome
+        habilitarCampos(false);
         try {
             loadRegistros(); // carregar table
         } catch (Exception ex) {
@@ -28,26 +28,35 @@ public class IfAluno extends javax.swing.JInternalFrame {
     }
 
     public void setEntidade() {
-        genero.setDescricao(tfDescricaoGenero.getText());
+        aluno.setNome(tfNome.getText());
+        aluno.setCurso(tfCurso.getText());
+        aluno.setNumeroMatricula(Integer.valueOf(tfNroMatricula.getText()));
+        aluno.setTurma(tfTurma.getText());
     }
 
     public void loadRegistros() throws Exception {
-        ResultSetGenero tableModel = new ResultSetGenero();
-        jtGenero.setModel(tableModel);
+        ResultSetAluno tableModel = new ResultSetAluno();
+        jtAluno.setModel(tableModel);
 
-        jtGenero.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        jtAluno.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 try {
-                    if (jtGenero.getSelectedRow() >= 0) {
+                    if (jtAluno.getSelectedRow() >= 0) {
 
-                        Object id = jtGenero.getValueAt(jtGenero.getSelectedRow(), 0); //pegar os objetos selecionados
-                        Object genero = jtGenero.getValueAt(jtGenero.getSelectedRow(), 1);
+                        Object id = jtAluno.getValueAt(jtAluno.getSelectedRow(), 0); //pegar os objetos selecionados
+                        Object curso = jtAluno.getValueAt(jtAluno.getSelectedRow(), 1);
+                        Object turma = jtAluno.getValueAt(jtAluno.getSelectedRow(), 2);
+                        Object nome = jtAluno.getValueAt(jtAluno.getSelectedRow(), 3);
+                        Object numeroMatricula = jtAluno.getValueAt(jtAluno.getSelectedRow(), 4);
 
                         //setar os campos de acordo com a linha selecionada
                         tfId.setText(id.toString());
-                        tfDescricaoGenero.setText(genero.toString());
-                        tfDescricaoGenero.setEnabled(true);
+                        tfNome.setText(nome.toString());
+                        tfTurma.setText(turma.toString());
+                        tfNroMatricula.setText(numeroMatricula.toString());
+                        tfCurso.setText(curso.toString());
+                        habilitarCampos(true);
                         btSalvar.setText("Atualizar");
                     }
                 } catch (Exception ex) {
@@ -65,9 +74,9 @@ public class IfAluno extends javax.swing.JInternalFrame {
 
         painel = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
-        lblCodigo1 = new javax.swing.JLabel();
-        lblDescricao1 = new javax.swing.JLabel();
-        tfDescricaoGenero = new javax.swing.JTextField();
+        lblCodigo = new javax.swing.JLabel();
+        lblCurso = new javax.swing.JLabel();
+        tfCurso = new javax.swing.JTextField();
         tfId = new javax.swing.JTextField();
         barraDeFerramentas1 = new javax.swing.JToolBar();
         btNovo = new javax.swing.JButton();
@@ -77,25 +86,31 @@ public class IfAluno extends javax.swing.JInternalFrame {
         btDelete = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         btFechar = new javax.swing.JButton();
+        tfNome = new javax.swing.JTextField();
+        lblNome = new javax.swing.JLabel();
+        tfTurma = new javax.swing.JTextField();
+        lblTurma = new javax.swing.JLabel();
+        tfNroMatricula = new javax.swing.JTextField();
+        lblNroMatricula = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtGenero = new javax.swing.JTable();
+        jtAluno = new javax.swing.JTable();
 
         painel.setPreferredSize(new java.awt.Dimension(600, 600));
 
         Titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        Titulo.setText("Gênero");
+        Titulo.setText("Aluno");
 
-        lblCodigo1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblCodigo1.setText("ID");
+        lblCodigo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblCodigo.setText("ID");
 
-        lblDescricao1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblDescricao1.setText("Nome");
+        lblCurso.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblCurso.setText("Curso");
 
-        tfDescricaoGenero.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tfDescricaoGenero.setText("Clique em Novo Para Inserir");
-        tfDescricaoGenero.addActionListener(new java.awt.event.ActionListener() {
+        tfCurso.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfCurso.setText("Clique em Novo Para Inserir");
+        tfCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDescricaoGeneroActionPerformed(evt);
+                tfCursoActionPerformed(evt);
             }
         });
 
@@ -179,8 +194,111 @@ public class IfAluno extends javax.swing.JInternalFrame {
         });
         barraDeFerramentas1.add(btFechar);
 
-        jtGenero.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jtGenero.setModel(new javax.swing.table.DefaultTableModel(
+        tfNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfNome.setText("Clique em Novo Para Inserir");
+        tfNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNomeActionPerformed(evt);
+            }
+        });
+
+        lblNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblNome.setText("Nome");
+
+        tfTurma.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfTurma.setText("Clique em Novo Para Inserir");
+        tfTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfTurmaActionPerformed(evt);
+            }
+        });
+
+        lblTurma.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblTurma.setText("Turma");
+
+        tfNroMatricula.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tfNroMatricula.setText("Clique em Novo Para Inserir");
+        tfNroMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNroMatriculaActionPerformed(evt);
+            }
+        });
+
+        lblNroMatricula.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblNroMatricula.setText("Nro. Matricula");
+
+        javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
+        painel.setLayout(painelLayout);
+        painelLayout.setHorizontalGroup(
+            painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelLayout.createSequentialGroup()
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(barraDeFerramentas1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(painelLayout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(painelLayout.createSequentialGroup()
+                                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblCodigo)
+                                            .addComponent(lblNome))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
+                                        .addComponent(lblCurso)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(painelLayout.createSequentialGroup()
+                                        .addComponent(lblTurma)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
+                                        .addComponent(lblNroMatricula)
+                                        .addGap(51, 51, 51)
+                                        .addComponent(tfNroMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(Titulo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        painelLayout.setVerticalGroup(
+            painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Titulo)
+                .addGap(18, 18, 18)
+                .addComponent(barraDeFerramentas1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCodigo))
+                .addGap(16, 16, 16)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCurso)))
+                    .addComponent(lblNome))
+                .addGap(20, 20, 20)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(tfTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfNroMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNroMatricula)))
+                    .addComponent(lblTurma))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jtAluno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jtAluno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -191,69 +309,29 @@ public class IfAluno extends javax.swing.JInternalFrame {
 
             }
         ));
-        jtGenero.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jtGenero.setFillsViewportHeight(true);
-        jtGenero.setIntercellSpacing(new java.awt.Dimension(5, 5));
-        jtGenero.setRowHeight(30);
-        jScrollPane1.setViewportView(jtGenero);
-
-        javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
-        painel.setLayout(painelLayout);
-        painelLayout.setHorizontalGroup(
-            painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelLayout.createSequentialGroup()
-                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(barraDeFerramentas1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(painelLayout.createSequentialGroup()
-                                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblDescricao1)
-                                    .addGroup(painelLayout.createSequentialGroup()
-                                        .addGap(13, 13, 13)
-                                        .addComponent(lblCodigo1)))
-                                .addGap(51, 51, 51)
-                                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfDescricaoGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 79, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-            .addGroup(painelLayout.createSequentialGroup()
-                .addGap(238, 238, 238)
-                .addComponent(Titulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        painelLayout.setVerticalGroup(
-            painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Titulo)
-                .addGap(18, 18, 18)
-                .addComponent(barraDeFerramentas1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigo1)
-                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDescricao1)
-                    .addComponent(tfDescricaoGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
+        jtAluno.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jtAluno.setFillsViewportHeight(true);
+        jtAluno.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        jtAluno.setRowHeight(30);
+        jScrollPane1.setViewportView(jtAluno);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,18 +344,17 @@ public class IfAluno extends javax.swing.JInternalFrame {
             try {
                 if (addRegistro == true) { //se for um novo registro irá criar um id novo e inserir o que foi digitado na tf
                     setEntidade(); //
-                    dao.insert(genero);
+                    dao.insert(aluno);
 
                     tfId.setText("");
-                    tfDescricaoGenero.setText("Clique em novo para inserir");
-                    tfDescricaoGenero.setEnabled(false);
+                    habilitarCampos(false);
                 } else {
-                    genero.setId(Integer.parseInt(tfId.getText())); // se for uma atualização mantém o mesmo id e altera o nome
+                    aluno.setId(Integer.parseInt(tfId.getText())); // se for uma atualização mantém o mesmo id e altera o nome
                     setEntidade();
-                    dao.update(genero);
+                    dao.update(aluno);
                     tfId.setText("");
-                    tfDescricaoGenero.setText("Clique em novo para inserir");
-                    tfDescricaoGenero.setEnabled(false);
+                    tfCurso.setText("Clique em novo para inserir");
+                    habilitarCampos(false);
                 }
                 addRegistro = false;
                 loadRegistros();
@@ -296,10 +373,9 @@ public class IfAluno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfIdActionPerformed
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
-        tfDescricaoGenero.grabFocus();
-        tfDescricaoGenero.setText("");
-        tfId.setText("");
-        tfDescricaoGenero.setEnabled(true);
+        tfNome.grabFocus();        
+        limparCampos();
+        habilitarCampos(true);        
         btSalvar.setText("Salvar");
         addRegistro = true;
     }//GEN-LAST:event_btNovoActionPerformed
@@ -308,12 +384,11 @@ public class IfAluno extends javax.swing.JInternalFrame {
         int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja Excluir esse registro?", "Confirma Exclusão?", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
             try {
-                genero.setId(Integer.parseInt(tfId.getText())); //A exclusão é feita através do id
+                aluno.setId(Integer.parseInt(tfId.getText())); //A exclusão é feita através do id
                 setEntidade();
-                dao.delete(genero);
-                loadRegistros();
-                tfDescricaoGenero.setText("Clique em Novo para Inserir");
-                tfDescricaoGenero.setEnabled(false);
+                dao.delete(aluno);
+                loadRegistros();                
+                habilitarCampos(false);
                 tfId.setText("");
                 btSalvar.setText("Salvar");
             } catch (Exception ex) {
@@ -322,9 +397,21 @@ public class IfAluno extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btDeleteActionPerformed
 
-    private void tfDescricaoGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDescricaoGeneroActionPerformed
+    private void tfCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCursoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfDescricaoGeneroActionPerformed
+    }//GEN-LAST:event_tfCursoActionPerformed
+
+    private void tfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNomeActionPerformed
+
+    private void tfTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTurmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfTurmaActionPerformed
+
+    private void tfNroMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNroMatriculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNroMatriculaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -338,12 +425,31 @@ public class IfAluno extends javax.swing.JInternalFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JTable jtGenero;
-    private javax.swing.JLabel lblCodigo1;
-    private javax.swing.JLabel lblDescricao1;
+    private javax.swing.JTable jtAluno;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblCurso;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblNroMatricula;
+    private javax.swing.JLabel lblTurma;
     private javax.swing.JPanel painel;
-    private javax.swing.JTextField tfDescricaoGenero;
+    private javax.swing.JTextField tfCurso;
     private javax.swing.JTextField tfId;
+    private javax.swing.JTextField tfNome;
+    private javax.swing.JTextField tfNroMatricula;
+    private javax.swing.JTextField tfTurma;
     // End of variables declaration//GEN-END:variables
+    private void limparCampos(){
+        tfNome.setText("");
+        tfCurso.setText("");
+        tfTurma.setText("");
+        tfNroMatricula.setText("");
+        tfId.setText("");
+    }
 
+    private void habilitarCampos(boolean action) {
+        tfNome.setEnabled(action);
+        tfCurso.setEnabled(action);
+        tfTurma.setEnabled(action);
+        tfNroMatricula.setEnabled(action);
+    }
 }

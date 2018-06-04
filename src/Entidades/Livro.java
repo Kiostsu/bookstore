@@ -15,6 +15,10 @@ public class Livro {
     private String titulo,editora,autor;
     private int ano;
     private Genero genero;
+    
+    public Livro(){
+        
+    }
 
     public Livro(String titulo) {
         this.titulo = titulo;

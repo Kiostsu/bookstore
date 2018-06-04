@@ -18,16 +18,29 @@ public class LocacaoDAO extends AbstractDAO {
         if (con == null) {
             con = new Conexao().getConnection();
         }
-        String sql = "insert into locacao(ALUNO,CURSO,TURMA,LIVRO,DATA,ENTREGA) values(?,?,?,?,?,?)";
-        //O segundo parâmetro específica que vai retornar o código do registro inserido
-        pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         try {
-            pstmt.setString(1, locacao.getAluno());
-            pstmt.setString(2, locacao.getCurso());
-            pstmt.setString(3, locacao.getTurma());
-            pstmt.setString(4, locacao.getLivro());
-            pstmt.setString(5, locacao.getData());
-            pstmt.setString(6, locacao.getEntrega());
+            pstmt = con.prepareStatement("select id from aluno where titulo=?");//selecionar id onde nome=
+            pstmt.setString(1, locacao.getAluno().getNome());
+            rs = pstmt.executeQuery(); //fazendo pesquisa no banco
+            rs.next(); //Pegar o primeiro elemento retornado da consulta enquanto houverem
+            int idAluno = rs.getInt("id"); // atribuir o campo id_marca da tabela marcas em uma variável
+            rs.close();//fecha o result set
+            
+            pstmt = con.prepareStatement("select id from livros where titulo=?");//selecionar id onde nome=
+            pstmt.setString(1, locacao.getLivro().getTitulo());
+            rs = pstmt.executeQuery(); //fazendo pesquisa no banco
+            rs.next(); //Pegar o primeiro elemento retornado da consulta enquanto houverem
+            int idLivro = rs.getInt("id"); // atribuir o campo id_marca da tabela marcas em uma variável
+            rs.close();//fecha o result set
+            
+            
+            String sql = "insert into locacao(id_aluno,id_livro,data,entrega) values(?,?,?,?,?,?)";
+             //O segundo parâmetro específica que vai retornar o código do registro inserido
+             pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, idAluno);
+            pstmt.setInt(2, idLivro);
+            pstmt.setString(3, locacao.getData());
+            pstmt.setString(4, locacao.getEntrega());                        
             pstmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Dados Inseridos com sucesso");
@@ -74,15 +87,28 @@ public class LocacaoDAO extends AbstractDAO {
         }
 
         try {
-            pstmt = con.prepareStatement("UPDATE LOCACAO SET ALUNO = ?, CURSO = ?, TURMA = ?, LIVRO = ?, DATA = ?, ENTREGA = ? WHERE ID = ?");
-
-            pstmt.setString(1, locacao.getAluno());
-            pstmt.setString(2, locacao.getCurso());
-            pstmt.setString(3, locacao.getTurma());
-            pstmt.setString(4, locacao.getLivro());
-            pstmt.setString(5, locacao.getData());
-            pstmt.setString(6, locacao.getEntrega());
-            pstmt.setInt(7, locacao.getId());
+            pstmt = con.prepareStatement("select id from aluno where titulo=?");//selecionar id onde nome=
+            pstmt.setString(1, locacao.getAluno().getNome());
+            rs = pstmt.executeQuery(); //fazendo pesquisa no banco
+            rs.next(); //Pegar o primeiro elemento retornado da consulta enquanto houverem
+            int idAluno = rs.getInt("id"); // atribuir o campo id_marca da tabela marcas em uma variável
+            rs.close();//fecha o result set
+            
+            pstmt = con.prepareStatement("select id from livros where titulo=?");//selecionar id onde nome=
+            pstmt.setString(1, locacao.getLivro().getTitulo());
+            rs = pstmt.executeQuery(); //fazendo pesquisa no banco
+            rs.next(); //Pegar o primeiro elemento retornado da consulta enquanto houverem
+            int idLivro = rs.getInt("id"); // atribuir o campo id_marca da tabela marcas em uma variável
+            rs.close();//fecha o result set
+            
+            
+            pstmt = con.prepareStatement("UPDATE LOCACAO SET id_aluno = ?, id_livro = ?, data = ?, entrega = ? where id = ?");
+            pstmt.setInt(1, idAluno);
+            pstmt.setInt(2, idLivro);
+            pstmt.setString(3, locacao.getData());
+            pstmt.setString(4, locacao.getEntrega());                        
+            pstmt.setInt(5, locacao.getId());
+            
             int i = pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Dados Atualizados com sucesso");
             if (i == 0) {
