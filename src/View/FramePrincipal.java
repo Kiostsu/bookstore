@@ -63,9 +63,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         mnCadastros.setText("Cadastros");
         mnCadastros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        miAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        miAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         miAluno.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        miAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/vcard.png"))); // NOI18N
+        miAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/user_add.png"))); // NOI18N
         miAluno.setText("Alunos");
         miAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +76,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         miGenero.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         miGenero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        miGenero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/vcard.png"))); // NOI18N
+        miGenero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/add.png"))); // NOI18N
         miGenero.setText("Generos");
         miGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,9 +85,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         });
         mnCadastros.add(miGenero);
 
-        miLivros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        miLivros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         miLivros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        miLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/vcard.png"))); // NOI18N
+        miLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/book_addresses_add.png"))); // NOI18N
         miLivros.setText("Livros");
         miLivros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +96,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         });
         mnCadastros.add(miLivros);
 
-        miLocacao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        miLocacao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         miLocacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         miLocacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/icones/menores/vcard.png"))); // NOI18N
         miLocacao.setText("Locações");

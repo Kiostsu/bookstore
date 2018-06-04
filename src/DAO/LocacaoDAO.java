@@ -19,7 +19,7 @@ public class LocacaoDAO extends AbstractDAO {
             con = new Conexao().getConnection();
         }
         try {
-            pstmt = con.prepareStatement("select id from aluno where titulo=?");//selecionar id onde nome=
+            pstmt = con.prepareStatement("select id from aluno where nome=?");//selecionar id onde nome=
             pstmt.setString(1, locacao.getAluno().getNome());
             rs = pstmt.executeQuery(); //fazendo pesquisa no banco
             rs.next(); //Pegar o primeiro elemento retornado da consulta enquanto houverem
@@ -34,7 +34,7 @@ public class LocacaoDAO extends AbstractDAO {
             rs.close();//fecha o result set
             
             
-            String sql = "insert into locacao(id_aluno,id_livro,data,entrega) values(?,?,?,?,?,?)";
+            String sql = "insert into locacao(id_aluno,id_livro,data,entrega) values(?,?,?,?)";
              //O segundo parâmetro específica que vai retornar o código do registro inserido
              pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, idAluno);
@@ -87,7 +87,7 @@ public class LocacaoDAO extends AbstractDAO {
         }
 
         try {
-            pstmt = con.prepareStatement("select id from aluno where titulo=?");//selecionar id onde nome=
+            pstmt = con.prepareStatement("select id from aluno where nome=?");//selecionar id onde nome=
             pstmt.setString(1, locacao.getAluno().getNome());
             rs = pstmt.executeQuery(); //fazendo pesquisa no banco
             rs.next(); //Pegar o primeiro elemento retornado da consulta enquanto houverem

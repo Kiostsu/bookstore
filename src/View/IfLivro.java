@@ -9,6 +9,7 @@ import DAO.ResultSetComboBoxAlunos;
 import DAO.ResultSetComboBoxLivros;
 import DAO.ResultSetLivro;
 import DAO.LivroDAO;
+import DAO.ResultSetComboBoxGenero;
 import Entidades.Aluno;
 import Entidades.Genero;
 import Entidades.Livro;
@@ -30,7 +31,7 @@ public class IfLivro extends javax.swing.JInternalFrame {
         try {
             loadRegistros();
            habilitarCampos(false);
-            cmbGenero.setModel(new ResultSetComboBoxLivros());
+            cmbGenero.setModel(new ResultSetComboBoxGenero());
           
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Não foi possível carregar os registros. Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -41,8 +42,8 @@ public class IfLivro extends javax.swing.JInternalFrame {
         livro.setAutor(tfAutor.getText()); //inserir o que esta na combobox marca
         livro.setGenero(new Genero(cmbGenero.getSelectedItem().toString()));
         livro.setAno(Integer.valueOf(tfAno.getText()));
+        livro.setTitulo(tfTitulo.getText());
         livro.setEditora(tfEditora.getText());
-        livro.setId(Integer.valueOf(tfIdLivro.getText()));
     }
 
     public void loadRegistros() throws Exception {
@@ -204,7 +205,6 @@ public class IfLivro extends javax.swing.JInternalFrame {
         lblAutor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblAutor.setText("Autor");
 
-        tfTitulo.setEditable(false);
         tfTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tfTitulo.setEnabled(false);
         tfTitulo.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +213,6 @@ public class IfLivro extends javax.swing.JInternalFrame {
             }
         });
 
-        tfAutor.setEditable(false);
         tfAutor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tfAutor.setEnabled(false);
         tfAutor.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +224,6 @@ public class IfLivro extends javax.swing.JInternalFrame {
         lblAno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblAno.setText("Ano");
 
-        tfAno.setEditable(false);
         tfAno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tfAno.setEnabled(false);
         tfAno.addActionListener(new java.awt.event.ActionListener() {
@@ -237,7 +235,6 @@ public class IfLivro extends javax.swing.JInternalFrame {
         lblEditora.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblEditora.setText("Editora");
 
-        tfEditora.setEditable(false);
         tfEditora.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tfEditora.setEnabled(false);
         tfEditora.addActionListener(new java.awt.event.ActionListener() {

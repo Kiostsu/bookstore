@@ -28,7 +28,7 @@ public class LivroDAO extends AbstractDAO {
             int idGenero = rs.getInt("id"); // atribuir o campo id_marca da tabela marcas em uma variável
             rs.close();//fecha o result set
             pstmt.close();//e o prep statement
-            String sql = "insert into livro(id_genero,titulo,editora,autor,ano) values(?,?,?,?,?)";
+            String sql = "insert into livros(id_genero,titulo,editora,autor,ano) values(?,?,?,?,?)";
             //O segundo parâmetro específica que vai retornar o código do registro inserido
             pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, idGenero);
@@ -57,7 +57,7 @@ public class LivroDAO extends AbstractDAO {
             if (con == null) {
                 con = new Conexao().getConnection();
             }
-            pstmt = con.prepareStatement("delete from livro where id = ?");
+            pstmt = con.prepareStatement("delete from livros where id = ?");
             pstmt.setInt(1, livro.getId());
             int i = pstmt.executeUpdate();
             if (i == 0) {
@@ -90,7 +90,7 @@ public class LivroDAO extends AbstractDAO {
             int idGenero = rs.getInt("id"); // atribuir o campo id_marca da tabela marcas em uma variável
             rs.close();//fecha o result set
             pstmt.close();//e o prep statement
-            String sql = "update livro set id_genero = ?,titulo = ?,editora = ?,autor = ?,ano = ? where id = ?";
+            String sql = "update livros set id_genero = ?,titulo = ?,editora = ?,autor = ?,ano = ? where id = ?";
             //O segundo parâmetro específica que vai retornar o código do registro inserido
             pstmt = con.prepareStatement(sql  );
             pstmt.setInt(1, idGenero);
