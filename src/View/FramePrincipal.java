@@ -27,6 +27,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         barraDeMenu = new javax.swing.JMenuBar();
         mnCadastros = new javax.swing.JMenu();
         miMarca = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuSobre = new javax.swing.JMenu();
         miInfo = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
@@ -70,6 +71,14 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
         mnCadastros.add(miMarca);
+
+        jMenuItem1.setText("Gêneros");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnCadastros.add(jMenuItem1);
 
         barraDeMenu.add(mnCadastros);
 
@@ -132,11 +141,19 @@ public class FramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_miSairActionPerformed
 
     private void miMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMarcaActionPerformed
-        IfLocacao frm = new IfLocacao(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
+        IfLocacao2 frm = new IfLocacao2(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
         jDesktopPane1.add(frm);
         //centralizar(frm);
         frm.setVisible(true);
     }//GEN-LAST:event_miMarcaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+      
+         IfGenero frm = new IfGenero(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
+        jDesktopPane1.add(frm);
+        //centralizar(frm);
+        frm.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +189,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraDeMenu;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuSair;
     private javax.swing.JMenu menuSobre;
     private javax.swing.JMenuItem miInfo;

@@ -6,10 +6,8 @@ package Entidades;
 public class Locacao {
 
     private int id;
-    private String aluno;
-    private String curso;
-    private String turma;
-    private String livro;
+    private Aluno aluno;
+    private Livro livro;
     private String data;
     private String entrega;
     
@@ -51,37 +49,23 @@ public class Locacao {
         this.id = id;
     }
 
-    public String getAluno() {
+    public Aluno getAluno() {
         return aluno;
     }
 
-    public void setAluno(String aluno) {
+    public void setAluno(Aluno aluno) {
         this.aluno = aluno;
     }
 
-    public String getCurso() {
-        return curso;
-    }
-
-    public void setCurso(String curso) {
-        this.curso = curso;
-    }
-
-    public String getTurma() {
-        return turma;
-    }
-
-    public void setTurma(String turma) {
-        this.turma = turma;
-    }
-
-    public String getLivro() {
+    public Livro getLivro() {
         return livro;
     }
 
-    public void setLivro(String livro) {
+    public void setLivro(Livro livro) {
         this.livro = livro;
     }
+
+
 
     public String getData() {
         return data;

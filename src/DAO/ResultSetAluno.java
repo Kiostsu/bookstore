@@ -6,14 +6,14 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
-// A classe ResultSetLocacao realiza a conexão com o banco de dados 
+// A classe ResultSetAluno realiza a conexão com o banco de dados 
 //via TableModel e mantém o ResultSet.
 //todos os métodos devem realizar a conexão com o BD
 //essa classe estende a classe AbstractTableModel
 //e, portanto, deve implementar todos os seus métodos abstratos
 //todos os métodos abstrados lançam uma exceção throws IllegalStateException
 //essa exceção 
-public class ResultSetLocacao extends AbstractTableModel {
+public class ResultSetAluno extends AbstractTableModel {
 
     //declaração dos atributos da classe
     private PreparedStatement pstmt; //responsável por executar instrução SQL
@@ -24,7 +24,7 @@ public class ResultSetLocacao extends AbstractTableModel {
     private boolean conectado = false;
 
     //metodo construtor 
-    public ResultSetLocacao() throws SQLException {
+    public ResultSetAluno() throws SQLException {
         if (con == null) {//conecta ao BD
             con = new Conexao().getConnection();
         }
@@ -34,18 +34,8 @@ public class ResultSetLocacao extends AbstractTableModel {
             throw new IllegalStateException("Não está conectado ao BD");
         }
 
-       
-        pstmt = con.prepareStatement("select l.id as Codigo,"
-                + " lv.titulo as Livro,"
-                + " a.nome as Aluno,"                                
-				+ " a.numero_matricula as NumeroMatricula," 				
-                + " l.data as Data,"
-				+ " l.entrega as Entrega"
-                + " from locacao l"
-				+ " inner join livros lv on"
-				+ " lv.id = l.id_livro"
-                + " inner join aluno a on"
-                + " a.id = l.id_aluno");
+ pstmt = con.prepareStatement("select * from aluno");
+                
         resultSet = pstmt.executeQuery();
         //obtém metadados da consulta: número e nome de colunas retornadas
         //tipos de dados daquela coluna
