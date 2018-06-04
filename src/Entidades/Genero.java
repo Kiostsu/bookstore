@@ -22,8 +22,15 @@ public class Genero {
         this.id = id;
     }
 
+    public Genero(String descricao) {
+        this.descricao = descricao;
+    }
+
     public String getDescricao() {
         return descricao;
+    }
+
+    public Genero() {
     }
 
     public void setDescricao(String descricao) {

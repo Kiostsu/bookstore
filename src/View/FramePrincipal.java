@@ -182,7 +182,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_miGeneroActionPerformed
 
     private void miLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLivrosActionPerformed
-        IfLivros frm = new IfLivros(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
+        IfLivro frm = new IfLivro(); //instancio a classe FrmLocacao para poder adicionar ao JDesktopPane
         jDesktopPane1.add(frm);
         //centralizar(frm);
         frm.setVisible(true);
