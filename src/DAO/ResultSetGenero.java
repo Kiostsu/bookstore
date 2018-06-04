@@ -113,7 +113,6 @@ public class ResultSetGenero extends AbstractTableModel {
 //se ocorreram erros retorna nulo
         return "";
     }
-
     @Override
     //obtém a qtde de linhas de ResultSet
     public int getRowCount() throws IllegalStateException {
